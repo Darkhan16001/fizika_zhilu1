@@ -1,0 +1,3330 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#081326">
+<title>Жылу мөлшері | Physics Lab</title>
+
+<style>
+:root {
+  --bg: #081326;
+  --panel: #14243f;
+  --panel2: #1d3454;
+  --border: #3b587b;
+  --text: #f0f6ff;
+  --muted: #b8cbe2;
+  --cyan: #75e8ff;
+  --blue: #4f91ff;
+  --green: #67e2ad;
+  --gold: #ffcc70;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 0%, #203e68, transparent 36%),
+    radial-gradient(circle at 80% 70%, #142f47, transparent 40%),
+    var(--bg);
+  color: var(--text);
+  font: 16px/1.65 "Segoe UI", Arial, sans-serif;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  color: white;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+h1, h2, h3 {
+  line-height: 1.3;
+}
+
+p, li {
+  color: #d8e6f6;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 265px;
+  max-width: 1650px;
+  margin: auto;
+  padding: 20px;
+  gap: 20px;
+}
+
+.main {
+  min-width: 0;
+}
+
+.hero {
+  padding: 45px 36px;
+  border: 1px solid #4d719b;
+  border-radius: 23px;
+  background:
+    radial-gradient(circle at 90% 15%, #286eb8, transparent 48%),
+    linear-gradient(135deg, #18385e, #101c31);
+}
+
+.eyebrow {
+  font-size: 13px;
+  color: var(--cyan);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: clamp(34px,5vw,62px);
+  margin: 15px 0 4px;
+}
+
+.hero h2 {
+  color: #b2daff;
+  font-weight: 500;
+  font-size: clamp(19px,2.7vw,32px);
+  margin: 3px 0;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 750px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 23px;
+}
+
+.chips span {
+  padding: 8px 13px;
+  border-radius: 30px;
+  background: #ffffff15;
+  border: 1px solid #ffffff2b;
+  font-size: 13px;
+}
+
+.heading {
+  margin: 30px 0 19px;
+}
+
+.heading h2 {
+  font-size: clamp(27px,3.3vw,40px);
+  margin: 7px 0;
+}
+
+.heading p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.tag {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--cyan);
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  padding: 27px;
+  margin-bottom: 19px;
+  background: linear-gradient(145deg,#172a46,#101d33);
+}
+
+.card h2 {
+  font-size: 26px;
+  margin-top: 0;
+}
+
+.card h3 {
+  color: #a4d0ff;
+  margin: 19px 0 8px;
+}
+
+.card p,
+.card li {
+  font-size: 17px;
+}
+
+.lead {
+  font-size: 19px !important;
+  color: #eef6ff;
+}
+
+.muted {
+  color: var(--muted) !important;
+  font-size: 14px !important;
+}
+
+.formula {
+  padding: 18px;
+  margin: 18px 0;
+  background: #091c34;
+  border-left: 5px solid var(--cyan);
+  border-radius: 11px;
+  color: #9beeff;
+  font-size: clamp(21px,3vw,29px);
+  font-weight: 800;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.example {
+  padding: 19px;
+  border-radius: 12px;
+  border: 1px solid #438e81;
+  background: #143b39;
+  margin: 20px 0;
+}
+
+.example b {
+  color: #81efbf;
+}
+
+.question-box {
+  padding: 17px;
+  border-radius: 12px;
+  border: 1px solid #897647;
+  background: #332b1f;
+  margin-top: 17px;
+}
+
+.question-box b {
+  color: var(--gold);
+}
+
+.diagram {
+  margin: 20px 0;
+  padding: 10px;
+  background: #081a2d;
+  border: 1px solid #466681;
+  border-radius: 15px;
+}
+
+.diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.diagram figcaption {
+  color: #bed6ed;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 9px;
+}
+
+.progress {
+  background: #2a415e;
+  height: 9px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress div {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg,#498eff,#70e7ff);
+  transition: width .2s;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 18px;
+  min-height: 45px;
+  color: white;
+  text-decoration: none;
+  background: #2d4668;
+  border: 1px solid #536f96;
+  border-radius: 11px;
+  font-weight: 750;
+}
+
+.btn:hover:not(:disabled) {
+  filter: brightness(1.15);
+}
+
+.primary {
+  background: linear-gradient(135deg,#3683ed,#7356ed);
+  border: 0;
+}
+
+.youtube {
+  background: #d5364b;
+  border: 0;
+}
+
+.full {
+  width: 100%;
+}
+
+/* ОҢ ЖАҚ ПАНЕЛЬ */
+
+.sidebar {
+  position: sticky;
+  top: 14px;
+  align-self: start;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.side-card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #152743f5;
+}
+
+.side-card h3 {
+  font-size: 17px;
+  margin: 0 0 12px;
+}
+
+.nav {
+  display: grid;
+  gap: 8px;
+}
+
+.nav button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 12px;
+  background: #243a5a;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 11px;
+}
+
+.nav button.active {
+  background: #285bac;
+  border-color: #77b7ff;
+}
+
+.nav button:hover {
+  filter: brightness(1.15);
+}
+
+.timer-card {
+  text-align: center;
+}
+
+#timer {
+  font-size: 41px;
+  font-weight: 900;
+  color: var(--cyan);
+  font-variant-numeric: tabular-nums;
+}
+
+#timerStatus {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.timer-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.timer-controls button {
+  flex: 1;
+  padding: 8px;
+  background: #315074;
+  border: 0;
+  border-radius: 8px;
+}
+
+.control-card {
+  display: grid;
+  gap: 9px;
+}
+
+.control-card .btn {
+  width: 100%;
+}
+
+.side-card small {
+  color: var(--muted);
+}
+
+/* КОНСПЕКТ */
+
+.note {
+  margin: 23px 0;
+  padding-left: 18px;
+  border-left: 3px solid #67a8ff;
+}
+
+.note h3 {
+  color: #a4d4ff;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 18px 0;
+}
+
+td, th {
+  padding: 11px;
+  border: 1px solid #49678e;
+  text-align: left;
+}
+
+th {
+  background: #264364;
+}
+
+/* ВИДЕО */
+
+.video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: black;
+}
+
+.video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ЕСЕПТЕР */
+
+.level-tabs,
+.round-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.tab {
+  padding: 9px 13px;
+  background: #294565;
+  border: 1px solid #4f7095;
+  border-radius: 10px;
+}
+
+.tab.active {
+  background: #3276d4;
+  border-color: #82bbff;
+}
+
+.field {
+  display: block;
+  margin: 14px 0;
+  color: #d4e3f5;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  display: block;
+  padding: 12px;
+  margin-top: 6px;
+  background: #091b32;
+  color: white;
+  border: 1px solid #5d80a8;
+  border-radius: 10px;
+  font-size: 17px;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid #66aeff;
+}
+
+.feedback {
+  margin: 18px 0;
+  padding: 17px;
+  background: #12354a;
+  color: #e2faff;
+  border: 1px solid #438aad;
+  border-radius: 12px;
+  white-space: pre-line;
+}
+
+.exercise {
+  padding: 13px;
+  margin: 9px 0;
+  background: #203652;
+  border: 1px solid #3c5c80;
+  border-radius: 10px;
+}
+
+/* КОМАНДАЛЫҚ ОЙЫН */
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 11px;
+}
+
+.team {
+  padding: 17px 10px;
+  background: #1e3454;
+  border: 1px solid #527198;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.team input {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  text-align: center;
+  color: white;
+  background: #102440;
+  border: 1px solid #4c6b92;
+  border-radius: 8px;
+}
+
+.team strong {
+  display: block;
+  color: var(--gold);
+  font-size: 43px;
+}
+
+.team small {
+  color: var(--muted);
+}
+
+.options {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.option {
+  width: min(100%,800px);
+  text-align: left;
+  padding: 14px;
+  border: 1px solid #537198;
+  border-radius: 11px;
+  background: #284261;
+}
+
+.option.correct {
+  background: #176a4c;
+  border-color: #72e9ad;
+}
+
+.option.wrong {
+  background: #793748;
+  border-color: #ff8595;
+}
+
+.creative-task {
+  padding: 19px;
+  background: #213854;
+  border: 1px solid #4f7091;
+  border-radius: 13px;
+  margin: 15px 0;
+}
+
+/* ҚОРЫТЫНДЫ */
+
+.result-hero {
+  text-align: center;
+  background:
+    radial-gradient(circle at top,#7d6229,transparent 65%),
+    #1a2942;
+  border: 2px solid #e9c36b;
+}
+
+.result-hero h2 {
+  font-size: clamp(27px,4vw,43px);
+  color: #ffe19c;
+}
+
+.podium {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 12px;
+}
+
+.podium-card {
+  padding: 19px 10px;
+  border-radius: 15px;
+  background: #243951;
+  border: 1px solid #59779d;
+  text-align: center;
+}
+
+.podium-card.first {
+  background: #46391e;
+  border-color: #f0cc70;
+}
+
+.podium-card .medal {
+  font-size: 39px;
+}
+
+.podium-card h3 {
+  overflow-wrap: anywhere;
+  color: white;
+}
+
+.podium-card strong {
+  display: block;
+  color: #ffdc8c;
+  font-size: 34px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.results-table {
+  min-width: 750px;
+}
+
+.results-table th,
+.results-table td {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.results-table th:nth-child(2),
+.results-table td:nth-child(2) {
+  text-align: left;
+}
+
+.results-table tr:first-child {
+  background: #243f62;
+}
+
+.winner-banner {
+  margin: 20px 0;
+  padding: 25px;
+  text-align: center;
+  background: #3f361e;
+  border: 2px solid #ffd57d;
+  border-radius: 16px;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+/* КАЛЬКУЛЯТОР */
+
+.calc-toggle {
+  position: fixed;
+  z-index: 999;
+  right: 17px;
+  bottom: 16px;
+  background: linear-gradient(135deg,#2279e8,#7047df);
+  color: white;
+  padding: 13px 18px;
+  border: 1px solid #8fbfff;
+  border-radius: 14px;
+  font-weight: 800;
+  box-shadow: 0 10px 35px #0009;
+}
+
+.calc-panel {
+  position: fixed;
+  z-index: 1000;
+  right: 17px;
+  bottom: 77px;
+  width: min(365px,calc(100vw - 34px));
+  max-height: calc(100dvh - 100px);
+  overflow-y: auto;
+  padding: 18px;
+  background: #12233d;
+  border: 1px solid #6588b5;
+  border-radius: 19px;
+  box-shadow: 0 20px 60px #000b;
+}
+
+.calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calc-header h3 {
+  margin: 0;
+}
+
+.calc-header button {
+  padding: 7px 12px;
+  background: #345072;
+  border: 0;
+  border-radius: 9px;
+}
+
+.calc-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.calc-tabs button {
+  flex: 1;
+  padding: 9px;
+  border: 1px solid #506b8f;
+  background: #2b4464;
+  border-radius: 9px;
+}
+
+.calc-tabs button.active {
+  background: #3479d9;
+}
+
+.calc-display {
+  margin-bottom: 11px;
+  padding: 17px 12px;
+  background: #07172b;
+  color: #88eaff;
+  border-radius: 10px;
+  text-align: right;
+  font-size: 30px;
+  font-weight: 800;
+  overflow-x: auto;
+}
+
+.calc-keys {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 8px;
+}
+
+.calc-keys button {
+  min-height: 53px;
+  background: #304b6c;
+  border: 0;
+  border-radius: 10px;
+  font-size: 19px;
+}
+
+.calc-keys .equal {
+  background: #347de5;
+}
+
+footer {
+  padding: 35px 0;
+  text-align: center;
+  color: #92a8c4;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+@media (max-width:850px) {
+  .layout {
+    grid-template-columns: minmax(0,1fr) 100px;
+    gap: 9px;
+    padding: 9px;
+  }
+
+  .sidebar {
+    top: 9px;
+    max-height: calc(100vh - 80px);
+  }
+
+  .side-card {
+    padding: 9px 6px;
+  }
+
+  .side-card h3 {
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .nav button {
+    justify-content: center;
+    font-size: 20px;
+    padding: 9px 4px;
+  }
+
+  .nav button span,
+  .control-card .btn span {
+    display: none;
+  }
+
+  .control-card .btn {
+    padding: 9px 4px;
+    font-size: 13px;
+  }
+
+  #timer {
+    font-size: 21px;
+  }
+
+  .timer-controls button {
+    padding: 6px 3px;
+  }
+
+  .hero {
+    padding: 22px 14px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 16px 12px;
+  }
+
+  .card p,
+  .card li {
+    font-size: 15px;
+  }
+
+  .scoreboard {
+    gap: 5px;
+  }
+
+  .team {
+    padding: 9px 3px;
+  }
+
+  .team input {
+    font-size: 10px;
+    padding: 5px 2px;
+  }
+
+  .team strong {
+    font-size: 26px;
+  }
+
+  .podium {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-toggle {
+    right: 9px;
+    bottom: 9px;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .calc-panel {
+    right: 9px;
+    bottom: 65px;
+    width: min(350px,calc(100vw - 18px));
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+  <main class="main">
+    <header class="hero">
+      <div class="eyebrow">⚡ PHYSICS LAB • 1 КУРС</div>
+      <h1>Жылу мөлшері</h1>
+      <h2>Ішкі энергияны өзгерту әдістері</h2>
+      <p>
+        Суреттермен түсіндіру, бейнесабақ,
+        конспект, дәптерге есептер және
+        үш командалық физика батлы.
+      </p>
+
+      <div class="chips">
+        <span>⏱ 80 минут</span>
+        <span>🖼 8 түсіндірме</span>
+        <span>📝 18 есеп</span>
+        <span>🏆 8 ойын</span>
+        <span>🥇 Қорытынды</span>
+      </div>
+    </header>
+
+    <div class="heading">
+      <div class="tag" id="stageTag">01 / ТҮСІНДІРУ</div>
+      <h2 id="stageTitle">Тақырыпты түсіндіру</h2>
+      <p id="stageDesc">Формулалар және суреттер</p>
+    </div>
+
+    <div id="view">
+      <div class="card">Сабақ жүктелуде...</div>
+    </div>
+
+    <footer>PHYSICS LAB • BY DARKHAN</footer>
+  </main>
+
+  <!-- БАРЛЫҚ БАСҚАРУ ОҢ ЖАҚТА -->
+  <aside class="sidebar">
+
+    <div class="side-card">
+      <h3>📚 Бөлімдер</h3>
+
+      <nav class="nav" id="navigation">
+        <button data-stage="0" class="active">
+          📖 <span>Түсіндіру</span>
+        </button>
+        <button data-stage="1">
+          🎬 <span>Видео</span>
+        </button>
+        <button data-stage="2">
+          📝 <span>Конспект</span>
+        </button>
+        <button data-stage="3">
+          🧮 <span>Есептер</span>
+        </button>
+        <button data-stage="4">
+          🏆 <span>Ойындар</span>
+        </button>
+      </nav>
+    </div>
+
+    <div class="side-card timer-card">
+      <h3>⏱ Уақыт</h3>
+      <div id="timer">25:00</div>
+      <small id="timerStatus">Уақыт жүріп жатыр</small>
+
+      <div class="timer-controls">
+        <button id="pauseTimer">⏸</button>
+        <button id="resetTimer">↻</button>
+      </div>
+    </div>
+
+    <div class="side-card control-card">
+      <h3>Басқару</h3>
+
+      <button id="previousButton" class="btn">
+        ← <span>Артқа</span>
+      </button>
+
+      <button id="nextButton" class="btn primary">
+        ➜ <span>Келесі</span>
+      </button>
+
+      <a class="btn youtube"
+         target="_blank"
+         rel="noopener noreferrer"
+         href="https://www.youtube.com/watch?v=1hcOXayOHf4">
+        ▶ <span>YouTube</span>
+      </a>
+    </div>
+
+    <div class="side-card">
+      <small>Жалпы сабақ: 80 минут</small>
+      <div class="progress">
+        <div id="overallProgress"></div>
+      </div>
+      <small id="stageCounter">1 / 5 кезең</small>
+    </div>
+  </aside>
+</div>
+
+<!-- ӘР БЕТКЕ ОРТАҚ КАЛЬКУЛЯТОР -->
+<button class="calc-toggle" id="calcToggle"
+        aria-expanded="false">
+  🧮 Калькулятор
+</button>
+
+<div id="calcPanel" class="calc-panel" hidden>
+
+  <div class="calc-header">
+    <h3>🧮 Калькулятор</h3>
+    <button id="calcClose">✕</button>
+  </div>
+
+  <div class="calc-tabs">
+    <button data-mode="math" class="active">
+      Математика
+    </button>
+    <button data-mode="physics">
+      Физика
+    </button>
+  </div>
+
+  <div id="mathMode">
+    <div id="mathDisplay" class="calc-display">0</div>
+
+    <div class="calc-keys" id="calcKeys">
+      <button data-key="AC">AC</button>
+      <button data-key="BACK">⌫</button>
+      <button data-key="%">%</button>
+      <button data-key="/">÷</button>
+
+      <button data-key="7">7</button>
+      <button data-key="8">8</button>
+      <button data-key="9">9</button>
+      <button data-key="*">×</button>
+
+      <button data-key="4">4</button>
+      <button data-key="5">5</button>
+      <button data-key="6">6</button>
+      <button data-key="-">−</button>
+
+      <button data-key="1">1</button>
+      <button data-key="2">2</button>
+      <button data-key="3">3</button>
+      <button data-key="+">+</button>
+
+      <button data-key="SIGN">±</button>
+      <button data-key="0">0</button>
+      <button data-key=".">.</button>
+      <button data-key="=" class="equal">=</button>
+    </div>
+  </div>
+
+  <div id="physicsMode" hidden>
+    <label class="field">
+      Формуланы таңда
+      <select id="formulaSelect">
+        <option value="Q">Q = cmΔt</option>
+        <option value="c">c = Q/(mΔt)</option>
+        <option value="m">m = Q/(cΔt)</option>
+        <option value="dt">Δt = Q/(cm)</option>
+        <option value="U">ΔU = Q − A</option>
+        <option value="A">A = Q − ΔU</option>
+        <option value="total">Q = ΔU + A</option>
+      </select>
+    </label>
+
+    <div id="physicsFields"></div>
+
+    <button id="physicsSolve" class="btn primary full">
+      Есептеу
+    </button>
+
+    <div id="physicsResult" class="feedback">
+      Мәліметтерді енгіз.
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+// ==============================================
+// 1. НЕГІЗГІ ФУНКЦИЯЛАР
+// ==============================================
+
+const $ = id => document.getElementById(id);
+
+const fmt = number => Number(number).toLocaleString(
+  "kk-KZ",
+  { maximumFractionDigits: 4 }
+);
+
+function safe(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[ch]);
+}
+
+const sections = [
+  ["01 / ТҮСІНДІРУ", "Тақырыпты түсіндіру", 25],
+  ["02 / ВИДЕО", "Қысқа бейнесабақ", 5],
+  ["03 / КОНСПЕКТ", "Дәптерге конспект", 15],
+  ["04 / ЕСЕПТЕР", "Есептер шығару", 15],
+  ["05 / ОЙЫНДАР", "Физика батлы", 20]
+];
+
+let stage = 0;
+let lessonPage = 0;
+let problemPage = 0;
+let gameRound = 0;
+let gameQuestion = 0;
+let showResults = false;
+
+// ==============================================
+// 2. ТАЙМЕР
+// ==============================================
+
+let remaining = 25 * 60;
+let timerRunning = false;
+let timerDeadline = 0;
+
+function timerDisplay() {
+  const min = Math.floor(remaining / 60);
+  const sec = remaining % 60;
+
+  $("timer").textContent =
+    String(min).padStart(2, "0") + ":" +
+    String(sec).padStart(2, "0");
+
+  $("timerStatus").textContent =
+    remaining === 0 ? "Уақыт аяқталды" :
+    timerRunning ? "Уақыт жүріп жатыр" :
+    "Уақыт тоқтатылды";
+
+  $("pauseTimer").textContent =
+    timerRunning ? "⏸" : "▶";
+}
+
+function timerStart() {
+  if (remaining <= 0) return;
+
+  timerRunning = true;
+  timerDeadline = Date.now() + remaining * 1000;
+  timerDisplay();
+}
+
+function timerPause() {
+  if (timerRunning) {
+    remaining = Math.max(
+      0,
+      Math.ceil((timerDeadline - Date.now()) / 1000)
+    );
+
+    timerRunning = false;
+  } else {
+    timerStart();
+  }
+
+  timerDisplay();
+}
+
+function timerReset() {
+  remaining = sections[stage][2] * 60;
+  timerStart();
+}
+
+setInterval(() => {
+  if (!timerRunning) return;
+
+  remaining = Math.max(
+    0,
+    Math.ceil((timerDeadline - Date.now()) / 1000)
+  );
+
+  if (remaining === 0) {
+    timerRunning = false;
+  }
+
+  timerDisplay();
+}, 250);
+
+$("pauseTimer").onclick = timerPause;
+$("resetTimer").onclick = timerReset;
+
+// ==============================================
+// 3. 8 СУРЕТТІ СХЕМА
+// ==============================================
+
+function drawing(i) {
+  const label = (x, y, text, size = 24, color = "#edf7ff") =>
+    `<text x="${x}" y="${y}" font-size="${size}"
+      text-anchor="middle" font-family="Arial"
+      font-weight="bold" fill="${color}">${text}</text>`;
+
+  const rect = (x, y, w, h, fill) =>
+    `<rect x="${x}" y="${y}" width="${w}" height="${h}"
+      rx="15" fill="${fill}"/>`;
+
+  const arrow = (x1, y1, x2, y2) =>
+    `<line x1="${x1}" y1="${y1}"
+      x2="${x2}" y2="${y2}"
+      stroke="#88e8ff" stroke-width="6"
+      marker-end="url(#arr)"/>`;
+
+  const dots = (x, y, color) =>
+    Array.from({ length: 15 }, (_, k) =>
+      `<circle cx="${x + k % 5 * 51}"
+        cy="${y + Math.floor(k / 5) * 58}"
+        r="12" fill="${color}"/>`
+    ).join("");
+
+  let content = "";
+
+  if (i === 0) {
+    content =
+      rect(45, 80, 350, 215, "#164a73") +
+      rect(505, 80, 350, 215, "#603723") +
+      dots(105, 130, "#6bc3ff") +
+      dots(560, 130, "#ff9e69") +
+      label(220, 53, "САЛҚЫН", 26, "#8fe0ff") +
+      label(680, 53, "ЫСТЫҚ", 26, "#ffba8b") +
+      label(220, 332, "Баяу қозғалыс", 22) +
+      label(680, 332, "Жылдам қозғалыс", 22);
+  }
+
+  if (i === 1) {
+    content =
+      rect(40, 75, 380, 240, "#1c4266") +
+      rect(480, 75, 380, 240, "#513826") +
+      label(230, 118, "ЖҰМЫС", 25) +
+      label(670, 118, "ЖЫЛУ АЛМАСУ", 25) +
+      rect(100, 174, 260, 35, "#ffa16b") +
+      arrow(110, 245, 345, 245) +
+      arrow(345, 275, 110, 275) +
+      `<circle cx="580" cy="210" r="62" fill="#fa9d64"/>
+       <circle cx="755" cy="210" r="51" fill="#66c2f4"/>` +
+      arrow(646, 210, 698, 210);
+  }
+
+  if (i === 2) {
+    content =
+      rect(80, 90, 245, 195, "#7d402b") +
+      rect(575, 90, 245, 195, "#205b84") +
+      label(202, 188, "80°C", 53) +
+      label(698, 188, "20°C", 53) +
+      arrow(340, 192, 560, 192) +
+      label(450, 154, "Q", 40, "#ffdd8a") +
+      label(450, 333, "Жылу берілу бағыты", 24);
+  }
+
+  if (i === 3) {
+    content =
+      rect(90, 90, 245, 205, "#245d93") +
+      rect(565, 90, 245, 205, "#79513a") +
+      label(210, 65, "СУ", 28) +
+      label(690, 65, "ТЕМІР", 28) +
+      rect(125, 126, 174, 138, "#6abde9") +
+      rect(600, 220, 174, 44, "#ffad70") +
+      label(210, 333, "c = 4200", 23) +
+      label(690, 333, "c = 460", 23);
+  }
+
+  if (i === 4) {
+    content =
+      rect(20, 65, 275, 245, "#15465d") +
+      rect(315, 65, 270, 245, "#173c61") +
+      rect(605, 65, 275, 245, "#493b25") +
+      label(158, 106, "Жылуөткізгіштік", 19) +
+      label(450, 106, "Конвекция", 22) +
+      label(740, 106, "Сәулелену", 22) +
+      rect(78, 188, 160, 31, "#ffa46e") +
+      arrow(110, 249, 225, 249) +
+      rect(379, 150, 145, 127, "#368dbd") +
+      arrow(406, 245, 406, 169) +
+      arrow(497, 168, 497, 247) +
+      `<circle cx="713" cy="193" r="47"
+         fill="#ffc762"/>` +
+      arrow(764, 187, 843, 142);
+  }
+
+  if (i === 5) {
+    content =
+      rect(90, 100, 250, 198, "#205e89") +
+      rect(560, 100, 250, 198, "#975034") +
+      label(215, 195, "20°C", 52) +
+      label(685, 195, "50°C", 52) +
+      arrow(355, 190, 548, 190) +
+      label(450, 150, "Q = cmΔt", 26, "#ffe2a2") +
+      label(450, 336, "Δt = 30°C", 25);
+  }
+
+  if (i === 6) {
+    content =
+      rect(270, 155, 340, 155, "#1d5b80") +
+      rect(260, 137, 360, 23, "#a8c4d2") +
+      rect(426, 76, 48, 62, "#a8c4d2") +
+      dots(310, 193, "#ffa06b") +
+      arrow(450, 136, 450, 64) +
+      arrow(624, 235, 750, 235) +
+      label(370, 99, "Q", 38) +
+      label(770, 203, "A", 38) +
+      label(450, 346, "Q = ΔU + A", 27);
+  }
+
+  if (i === 7) {
+    content =
+      rect(50, 80, 375, 105, "#194a76") +
+      rect(475, 80, 375, 105, "#194a76") +
+      rect(50, 205, 375, 105, "#20594d") +
+      rect(475, 205, 375, 105, "#20594d") +
+      label(235, 145, "Q = cmΔt", 32) +
+      label(660, 145, "c = Q/(mΔt)", 29) +
+      label(235, 270, "m = Q/(cΔt)", 29) +
+      label(660, 270, "Q = ΔU + A", 32);
+  }
+
+  return `
+    <figure class="diagram">
+      <svg viewBox="0 0 900 365"
+           xmlns="http://www.w3.org/2000/svg"
+           role="img" aria-label="Физика сурет-схемасы">
+        <defs>
+          <marker id="arr" markerWidth="9"
+            markerHeight="9" refX="7" refY="3"
+            orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#88e8ff"/>
+          </marker>
+        </defs>
+        <rect width="900" height="365"
+          rx="17" fill="#09223c"/>
+        ${content}
+      </svg>
+      <figcaption>
+        Физикалық құбылыстың көрнекі схемасы
+      </figcaption>
+    </figure>`;
+}
+
+// ==============================================
+// 4. ТҮСІНДІРМЕЛЕР
+// ==============================================
+
+const lessons = [
+  {
+    title: "Ішкі энергия",
+    text: `
+      <p class="lead">
+        Барлық денелер атомдар мен молекулалардан
+        тұрады. Бұл бөлшектер үздіксіз қозғалып,
+        өзара әрекеттеседі.
+      </p>
+      <p>
+        Бөлшектердің ретсіз қозғалысының кинетикалық
+        энергиясы және өзара әрекеттесуінің
+        потенциалдық энергиясы қосылып,
+        дененің ішкі энергиясын құрайды.
+      </p>
+      <p>
+        Температура артқанда бөлшектердің орташа
+        кинетикалық энергиясы да артады.
+        Ішкі энергия дененің массасына, температурасына,
+        күйіне және басқа қасиеттеріне тәуелді.
+      </p>
+    `,
+    formula: "U = Eₖ + Eₚ",
+    example: "Суды қыздырғанда молекулаларының орташа қозғалыс энергиясы артады.",
+    ask: "Ішкі энергия қандай энергиялардан құралады?"
+  },
+  {
+    title: "Ішкі энергияны өзгерту әдістері",
+    text: `
+      <p class="lead">
+        Дененің ішкі энергиясын өзгертудің екі
+        негізгі әдісі бар.
+      </p>
+      <h3>1. Жұмыс атқару</h3>
+      <p>
+        Механикалық жұмыс арқылы ішкі энергияны
+        өзгертуге болады. Мысалы, алақанды үйкегенде
+        үйкеліс жұмысы нәтижесінде ол жылынады.
+      </p>
+      <h3>2. Жылу алмасу</h3>
+      <p>
+        Температурасы әртүрлі денелер арасында
+        энергия берілгенде ішкі энергия өзгереді.
+        Мысалы, ыстық кеседен қолға жылу өтеді.
+      </p>
+    `,
+    formula: "ΔU = U₂ − U₁",
+    example: "Үйкеліс — жұмыс атқару, ал шәйнектің қызуы — жылу алмасу мысалы.",
+    ask: "Механикалық жұмыс арқылы ішкі энергияны қалай өзгертуге болады?"
+  },
+  {
+    title: "Жылу мөлшері",
+    text: `
+      <p class="lead">
+        Жылу мөлшері — жылу алмасу кезінде
+        берілетін энергия мөлшері.
+      </p>
+      <p>
+        Жылу мөлшері Q әрпімен белгіленеді.
+        SI жүйесінде джоульмен өлшенеді.
+      </p>
+      <p>
+        Жылу мөлшері массаға, меншікті
+        жылусыйымдылыққа және температураның
+        өзгерісіне тәуелді.
+      </p>
+      <p>
+        Дене қыздырылса Q оң, салқындаса Q теріс.
+        Q = cmΔt формуласы фазалық күй
+        өзгермейтін жағдайда қолданылады.
+      </p>
+    `,
+    formula: "Q = cm(t₂ − t₁)",
+    example: "1 кДж = 1000 Дж. Температура айырмасы Δt = t₂ − t₁.",
+    ask: "Жылу мөлшерінің өлшем бірлігі қандай?"
+  },
+  {
+    title: "Меншікті жылусыйымдылық",
+    text: `
+      <p>
+        Меншікті жылусыйымдылық 1 кг заттың
+        температурасын 1°C-қа өзгертуге қажет
+        жылу мөлшерін сипаттайды.
+      </p>
+      <p>
+        Белгіленуі c. Өлшем бірлігі —
+        Дж/(кг·°C).
+      </p>
+      <p>
+        Су үшін c = 4200, темір үшін шамамен
+        c = 460, алюминий үшін c = 900.
+      </p>
+      <p>
+        Осы себепті бірдей масса мен температура
+        өзгерісінде суды қыздыруға темірден
+        көбірек энергия қажет.
+      </p>
+    `,
+    formula: "c = Q/(mΔt)",
+    example: "1 кг судың температурасын 1°C-қа арттыру үшін шамамен 4200 Дж қажет.",
+    ask: "Судың жылусыйымдылығы темірден неге жоғары?"
+  },
+  {
+    title: "Жылу берілу тәсілдері",
+    text: `
+      <h3>Жылуөткізгіштік</h3>
+      <p>
+        Заттың көлемдік орын ауыстыруынсыз
+        энергияның берілуі. Мысалы, металл
+        қасықтың сабының қызуы.
+      </p>
+      <h3>Конвекция</h3>
+      <p>
+        Сұйықтар мен газдардың қозғалысы арқылы
+        жылу тасымалданады. Мысалы,
+        жылы ауаның жоғары көтерілуі.
+      </p>
+      <h3>Сәулелену</h3>
+      <p>
+        Энергия электромагниттік толқындар
+        арқылы беріледі. Бұл тәсіл вакуумда
+        да жүзеге асады.
+      </p>
+    `,
+    formula: "3 тәсіл: өткізгіштік, конвекция, сәулелену",
+    example: "Қасық — өткізгіштік; су ағыны — конвекция; Күн — сәулелену.",
+    ask: "Үш жылу берілу тәсіліне өмірден мысал келтір."
+  },
+  {
+    title: "Жылу мөлшерін есептеу",
+    text: `
+      <p>
+        Массасы 2 кг суды 20°C-тан 50°C-қа
+        дейін қыздыруға қажетті жылуды табамыз.
+      </p>
+      <h3>Берілгені</h3>
+      <p>
+        m = 2 кг<br>
+        c = 4200 Дж/(кг·°C)<br>
+        t₁ = 20°C<br>
+        t₂ = 50°C
+      </p>
+      <h3>Шешуі</h3>
+      <p>
+        Δt = 50 − 20 = 30°C<br>
+        Q = 4200 × 2 × 30<br>
+        Q = 252000 Дж
+      </p>
+      <h3>Жауабы: 252 кДж</h3>
+    `,
+    formula: "Q = cmΔt",
+    example: "Масса екі есе артса, бірдей Δt кезінде қажет жылу да екі есе артады.",
+    ask: "Массасы 1 кг су үшін осы есептің жауабы қанша?"
+  },
+  {
+    title: "Термодинамиканың бірінші заңы",
+    text: `
+      <p class="lead">
+        Термодинамиканың бірінші заңы —
+        энергияның сақталу заңына негізделген.
+      </p>
+      <p>
+        Жүйеге берілген жылу ішкі энергияны
+        өзгертуге және жүйенің жұмыс атқаруына
+        жұмсалады.
+      </p>
+      <p>
+        Q — берілген жылу.<br>
+        ΔU — ішкі энергия өзгерісі.<br>
+        A — газдың атқарған жұмысы.
+      </p>
+      <p>
+        Газға 1500 Дж жылу беріліп, газ 500 Дж
+        жұмыс атқарса:
+      </p>
+      <p>
+        ΔU = 1500 − 500 = 1000 Дж.
+      </p>
+    `,
+    formula: "Q = ΔU + A",
+    example: "Жылу алған газ ұлғайып, поршеньді қозғалта алады.",
+    ask: "Газ жұмыс атқармаса, берілген жылу қайда жұмсалады?"
+  },
+  {
+    title: "Қорытынды формулалар",
+    text: `
+      <p>
+        Ішкі энергия жұмыс атқару және жылу
+        алмасу арқылы өзгереді.
+      </p>
+      <p>
+        Жылу берілу тәсілдері:
+        жылуөткізгіштік, конвекция, сәулелену.
+      </p>
+      <h3>Негізгі формулалар</h3>
+      <p>
+        Q = cmΔt<br>
+        c = Q/(mΔt)<br>
+        m = Q/(cΔt)<br>
+        Δt = Q/(cm)<br>
+        Q = ΔU + A
+      </p>
+      <p>
+        Формулаларды қолданғанда берілген шамаларды,
+        өлшем бірліктерін және жауапты дұрыс жазу қажет.
+      </p>
+    `,
+    formula: "Q = cmΔt; Q = ΔU + A",
+    example: "Қыздыру кезінде Q оң, салқындағанда Q теріс болуы мүмкін.",
+    ask: "Тақырып бойынша үш формуланы дәптерге жаз."
+  }
+];
+
+function renderLesson() {
+  const l = lessons[lessonPage];
+
+  $("view").innerHTML = `
+    <article class="card">
+      <span class="tag">
+        ТҮСІНДІРМЕ ${lessonPage + 1} / 8
+      </span>
+
+      <div class="progress">
+        <div style="width:${(lessonPage + 1) / 8 * 100}%"></div>
+      </div>
+
+      <h2>${lessonPage + 1}. ${l.title}</h2>
+
+      ${drawing(lessonPage)}
+
+      ${l.text}
+
+      <div class="formula">${l.formula}</div>
+
+      <div class="example">
+        <b>💡 Өмірден мысал</b>
+        <p>${l.example}</p>
+      </div>
+
+      <div class="question-box">
+        <b>💬 Сұрақ</b>
+        <p>${l.ask}</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn"
+          data-action="back"
+          ${lessonPage === 0 ? "disabled" : ""}>
+          ← Алдыңғы бет
+        </button>
+        <button class="btn primary"
+          data-action="next">
+          ${lessonPage === 7
+            ? "Видеоға өту →"
+            : "Келесі түсіндірме →"}
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+// ==============================================
+// 5. ВИДЕО
+// ==============================================
+
+function renderVideo() {
+  $("view").innerHTML = `
+    <div class="card">
+      <h2>🎬 Жылу мөлшері — бейнесабақ</h2>
+
+      <p class="lead">
+        Видеоны көріп, жылу мөлшерінің формуласы
+        қалай қолданылатынын талқылаңдар.
+      </p>
+
+      <div class="video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/1hcOXayOHf4?start=0&end=240"
+          title="Жылу мөлшері"
+          allow="accelerometer; encrypted-media; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <p class="muted">
+        Видео ашылмаса, оң жақтағы YouTube
+        батырмасын пайдаланыңдар.
+      </p>
+
+      <h3>Талқылау сұрақтары</h3>
+      <p>1. Q = cmΔt формуласы нені білдіреді?</p>
+      <p>2. Температура айырмасын қалай табамыз?</p>
+      <p>3. Неліктен өлшем бірліктерін жазу қажет?</p>
+
+      <div class="actions">
+        <button class="btn primary"
+          data-action="next">
+          Конспектке өту →
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// ==============================================
+// 6. 10 КОНСПЕКТ
+// ==============================================
+
+const notes = [
+  [
+    "Ішкі энергия",
+    "Ішкі энергия — бөлшектердің ретсіз қозғалысының кинетикалық энергиясы мен олардың өзара әрекеттесуінің потенциалдық энергиясының қосындысы."
+  ],
+  [
+    "Ішкі энергияны өзгерту",
+    "Ішкі энергия жұмыс атқару және жылу алмасу арқылы өзгереді."
+  ],
+  [
+    "Жылу мөлшері",
+    "Q — жылу алмасу кезінде берілетін энергия. Өлшем бірлігі — Дж."
+  ],
+  [
+    "Жылу мөлшерінің формуласы",
+    "Q = cmΔt. Мұндағы c — меншікті жылусыйымдылық, m — масса, Δt — температура өзгерісі."
+  ],
+  [
+    "Меншікті жылусыйымдылық",
+    "c = Q/(mΔt). Өлшем бірлігі — Дж/(кг·°C)."
+  ],
+  [
+    "Жылуөткізгіштік",
+    "Заттың көлемдік қозғалысынсыз энергияның берілуі. Мысалы, темір қасықтың қызуы."
+  ],
+  [
+    "Конвекция",
+    "Сұйықтар мен газдардың қозғалысы арқылы жылудың тасымалдануы."
+  ],
+  [
+    "Сәулелену",
+    "Электромагниттік толқындар арқылы энергия берілуі. Вакуумда да таралады."
+  ],
+  [
+    "Термодинамиканың бірінші заңы",
+    "Q = ΔU + A. Мұндағы A — газдың атқарған жұмысы. ΔU = Q − A."
+  ],
+  [
+    "Есеп шығару алгоритмі",
+    "Берілгені → белгісіз шама → формула → есептеу → жауап. Өлшем бірліктерін көрсету қажет."
+  ]
+];
+
+function renderNotes() {
+  $("view").innerHTML = `
+    <div class="card">
+      <h2>📝 Дәптерге арналған конспект</h2>
+
+      ${notes.map((n, i) => `
+        <div class="note">
+          <h3>${i + 1}. ${n[0]}</h3>
+          <p>${n[1]}</p>
+        </div>
+      `).join("")}
+
+      <h3>Меншікті жылусыйымдылықтар</h3>
+
+      <table>
+        <tr><th>Зат</th><th>c, Дж/(кг·°C)</th></tr>
+        <tr><td>Су</td><td>4200</td></tr>
+        <tr><td>Алюминий</td><td>900</td></tr>
+        <tr><td>Темір</td><td>460</td></tr>
+        <tr><td>Мыс</td><td>380</td></tr>
+      </table>
+
+      <div class="formula">Q = cm(t₂ − t₁)</div>
+
+      <div class="actions">
+        <button class="btn primary"
+          data-action="next">
+          Есептерге өту →
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// ==============================================
+// 7. ДӘПТЕРГЕ ШЫҒАРАТЫН 18 ЕСЕП
+// ==============================================
+
+const problems = [
+  [
+    "1 кг суды 20°C-тан 40°C-қа қыздыруға қажет Q.",
+    "Q = cmΔt", 84000, "Дж",
+    "4200 × 1 × 20 = 84000 Дж"
+  ],
+  [
+    "0,5 кг алюминийді 40°C-қа қыздыру үшін Q қанша?",
+    "Q = cmΔt", 18000, "Дж",
+    "900 × 0,5 × 40 = 18000 Дж"
+  ],
+  [
+    "2 кг мысты 20°C-қа қыздыруға қажет жылу.",
+    "Q = cmΔt", 15200, "Дж",
+    "380 × 2 × 20 = 15200 Дж"
+  ],
+  [
+    "1,5 кг темір 50°C-қа салқындады. Бөлінген жылудың оң мөлшерін тап.",
+    "|Q| = cm|Δt|", 34500, "Дж",
+    "460 × 1,5 × 50 = 34500 Дж"
+  ],
+  [
+    "2 кг су 84000 Дж жылу алды. Δt қанша?",
+    "Δt = Q/(cm)", 10, "°C",
+    "84000/(4200 × 2) = 10°C"
+  ],
+  [
+    "Алюминийді 25°C-қа қыздыруға 45000 Дж жұмсалды. Массасы?",
+    "m = Q/(cΔt)", 2, "кг",
+    "45000/(900 × 25) = 2 кг"
+  ],
+  [
+    "1 кг затты 20°C-қа қыздыруға 9200 Дж қажет. c-ны тап.",
+    "c = Q/(mΔt)", 460, "Дж/(кг·°C)",
+    "9200/(1 × 20) = 460"
+  ],
+  [
+    "0,75 кг суды 20°C-тан 80°C-қа қыздыруға қажет Q.",
+    "Q = cmΔt", 189000, "Дж",
+    "4200 × 0,75 × 60 = 189000 Дж"
+  ],
+  [
+    "0,6 кг су бастапқыда 25°C. Оған 25200 Дж берілді. Соңғы температура?",
+    "t₂ = t₁ + Q/(cm)", 35, "°C",
+    "25 + 25200/(4200 × 0,6) = 35°C"
+  ],
+  [
+    "1,2 кг мыс 100°C-тан 25°C-қа салқындады. Бөлінген жылу?",
+    "|Q| = cm|Δt|", 34200, "Дж",
+    "380 × 1,2 × 75 = 34200 Дж"
+  ],
+  [
+    "80°C-тағы 1 кг су мен 20°C-тағы 2 кг су араластырылды. Соңғы температура?",
+    "t = (m₁t₁ + m₂t₂)/(m₁ + m₂)", 40, "°C",
+    "(1 × 80 + 2 × 20)/3 = 40°C"
+  ],
+  [
+    "0,5 кг су және 0,2 кг мыс 20°C-қа бірге қыздырылды. Жалпы жылу?",
+    "Q = (m₁c₁ + m₂c₂)Δt", 43520, "Дж",
+    "(0,5 × 4200 + 0,2 × 380) × 20 = 43520 Дж"
+  ],
+  [
+    "Газ 1500 Дж жылу алып, 400 Дж жұмыс атқарды. ΔU?",
+    "ΔU = Q − A", 1100, "Дж",
+    "1500 − 400 = 1100 Дж"
+  ],
+  [
+    "Газ 800 Дж жылу алып, ΔU = 500 Дж болды. A неше?",
+    "A = Q − ΔU", 300, "Дж",
+    "800 − 500 = 300 Дж"
+  ],
+  [
+    "Газдың ΔU = 1200 Дж, ал A = 300 Дж. Q қанша?",
+    "Q = ΔU + A", 1500, "Дж",
+    "1200 + 300 = 1500 Дж"
+  ],
+  [
+    "Жылу алмастырмай газға 250 Дж жұмыс атқарылды. ΔU?",
+    "ΔU = Q − A", 250, "Дж",
+    "Q = 0, A = −250 Дж. ΔU = 250 Дж"
+  ],
+  [
+    "Тұрақты көлемдегі газ 850 Дж жылу алды. ΔU?",
+    "ΔU = Q − A", 850, "Дж",
+    "A = 0. ΔU = 850 Дж"
+  ],
+  [
+    "60°C-тағы 2 кг су мен 20°C-тағы 3 кг су араластырылды. Соңғы температура?",
+    "t = (m₁t₁ + m₂t₂)/(m₁ + m₂)", 36, "°C",
+    "(2 × 60 + 3 × 20)/5 = 36°C"
+  ]
+];
+
+const solvedProblems = new Set();
+const revealedSolutions = new Set();
+
+function renderProblem() {
+  const p = problems[problemPage];
+  const level = Math.floor(problemPage / 6);
+
+  $("view").innerHTML = `
+    <div class="card">
+      <h2>🧮 Дәптерге 18 есеп</h2>
+
+      <p>
+        1–6: жеңіл деңгей.<br>
+        7–12: орташа деңгей.<br>
+        13–18: күрделі деңгей.
+      </p>
+
+      <div class="level-tabs">
+        ${[0,1,2].map(i => `
+          <button class="tab ${level === i ? "active" : ""}"
+            data-action="level" data-index="${i}">
+            ${i + 1}-деңгей
+          </button>
+        `).join("")}
+      </div>
+
+      <p>Шығарылғаны: ${solvedProblems.size} / 18</p>
+      <p class="muted">
+        Сабақта алғашқы 6 есепті орындап,
+        қалғанын қосымша жұмысқа пайдалануға болады.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="tag">
+        ЕСЕП ${problemPage + 1} / 18
+      </span>
+
+      <h2>${p[0]}</h2>
+
+      <h3>Формула</h3>
+      <div class="formula">${p[1]}</div>
+
+      <p>
+        Есепті дәптерге толық шығар.
+        Содан кейін жауабыңды енгіз.
+      </p>
+
+      <label class="field">
+        Жауап (${p[3]})
+        <input id="problemAnswer"
+          type="number" step="any"
+          placeholder="Жауапты санмен жаз">
+      </label>
+
+      <div class="actions">
+        <button class="btn primary"
+          data-action="check-problem">
+          ✅ Тексеру
+        </button>
+
+        <button class="btn"
+          data-action="solution">
+          📖 Шешу жолы
+        </button>
+      </div>
+
+      <div id="problemFeedback"
+        class="feedback" hidden></div>
+
+      <div id="solutionBox" class="example"
+        ${revealedSolutions.has(problemPage) ? "" : "hidden"}>
+        <b>Шешуі:</b>
+        <p>${p[4]}</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn"
+          data-action="back"
+          ${problemPage === 0 ? "disabled" : ""}>
+          ← Алдыңғы есеп
+        </button>
+
+        <button class="btn primary"
+          data-action="next">
+          ${problemPage === 17
+            ? "Ойынға өту →"
+            : "Келесі есеп →"}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function checkProblem() {
+  const p = problems[problemPage];
+  const raw = $("problemAnswer").value;
+
+  if (raw.trim() === "") {
+    $("problemFeedback").hidden = false;
+    $("problemFeedback").textContent =
+      "Алдымен жауабыңды жаз.";
+    return;
+  }
+
+  const answer = Number(raw);
+  const tolerance = Math.max(
+    0.01,
+    Math.abs(p[2]) * 0.00001
+  );
+
+  const correct = Number.isFinite(answer) &&
+    Math.abs(answer - p[2]) <= tolerance;
+
+  $("problemFeedback").hidden = false;
+
+  if (correct) {
+    solvedProblems.add(problemPage);
+    revealedSolutions.add(problemPage);
+    $("solutionBox").hidden = false;
+
+    $("problemFeedback").textContent =
+      "✅ Дұрыс! " + fmt(p[2]) + " " + p[3];
+  } else {
+    $("problemFeedback").textContent =
+      "❌ Қате. Формула мен өлшем бірлігін қайта тексер.";
+  }
+}
+
+// ==============================================
+// 8. КОМАНДАЛЫҚ ОЙЫНДАР
+// ==============================================
+
+function choice(q, options, right, why) {
+  return { q, options, right, why };
+}
+
+function numeric(q, answer, why) {
+  return { q, answer, why };
+}
+
+const rounds = [
+  {
+    title: "🧠 Білім батлы",
+    minutes: 2,
+    points: 10,
+    type: "choice",
+    items: [
+      choice(
+        "Ішкі энергия нені қамтиды?",
+        [
+          "Бөлшектердің кинетикалық және потенциалдық энергиясын",
+          "Тек дененің қозғалыс энергиясын",
+          "Тек дененің ауырлық энергиясын"
+        ],
+        0,
+        "Ішкі энергия бөлшектердің қозғалысы мен өзара әсерлесуіне байланысты."
+      ),
+      choice(
+        "Ішкі энергия қандай тәсілдермен өзгереді?",
+        [
+          "Тек қыздыру",
+          "Жұмыс атқару және жылу алмасу",
+          "Тек қозғалыс"
+        ],
+        1,
+        "Ішкі энергия жұмыс атқару және жылу алмасу арқылы өзгереді."
+      ),
+      choice(
+        "Жылу мөлшерінің бірлігі қандай?",
+        ["Вольт", "Ньютон", "Джоуль"],
+        2,
+        "Жылу мөлшері Дж бірлігімен өлшенеді."
+      )
+    ]
+  },
+  {
+    title: "⚖️ Дұрыс па, бұрыс па?",
+    minutes: 2,
+    points: 10,
+    type: "choice",
+    items: [
+      choice(
+        "Жылу өздігінен жылы денеден салқын денеге өтеді.",
+        ["Дұрыс", "Бұрыс"],
+        0,
+        "Жылу жоғары температурадан төмен температураға беріледі."
+      ),
+      choice(
+        "Конвекция тек қатты денелерде болады.",
+        ["Дұрыс", "Бұрыс"],
+        1,
+        "Конвекция сұйықтар мен газдарға тән."
+      ),
+      choice(
+        "Сәулелену вакуумда тарала алады.",
+        ["Дұрыс", "Бұрыс"],
+        0,
+        "Электромагниттік толқындар вакуум арқылы таралады."
+      )
+    ]
+  },
+  {
+    title: "🖼️ Суреттен анықта",
+    minutes: 2,
+    points: 10,
+    type: "picture",
+    items: [
+      {
+        ...choice(
+          "Металл арқылы жылу таралуы қай тәсіл?",
+          ["Конвекция", "Жылуөткізгіштік", "Сәулелену"],
+          1,
+          "Жылу металл бойымен таралады."
+        ),
+        picture: "metal"
+      },
+      {
+        ...choice(
+          "Сұйықтың жылы қабаты көтерілді. Бұл не?",
+          ["Конвекция", "Жылуөткізгіштік", "Сәулелену"],
+          0,
+          "Сұйық қабаттары қозғалып, жылуды тасымалдайды."
+        ),
+        picture: "water"
+      },
+      {
+        ...choice(
+          "Күннен Жерге жылу қалай беріледі?",
+          ["Конвекция", "Жылуөткізгіштік", "Сәулелену"],
+          2,
+          "Энергия электромагниттік толқындар арқылы жетеді."
+        ),
+        picture: "sun"
+      }
+    ]
+  },
+  {
+    title: "🧮 Есеп батлы",
+    minutes: 4,
+    points: 20,
+    type: "numeric",
+    items: [
+      numeric(
+        "1 кг судың температурасы 20°C-қа артты. Q неше Дж?",
+        84000,
+        "Q = 4200 × 1 × 20 = 84000 Дж."
+      ),
+      numeric(
+        "2 кг темір 30°C-қа қыздырылды. Q неше Дж?",
+        27600,
+        "Q = 460 × 2 × 30 = 27600 Дж."
+      ),
+      numeric(
+        "Газ 1100 Дж жылу алып, 300 Дж жұмыс атқарды. ΔU неше Дж?",
+        800,
+        "ΔU = 1100 − 300 = 800 Дж."
+      )
+    ]
+  },
+  {
+    title: "🌍 Өмірлік жағдай",
+    minutes: 2,
+    points: 10,
+    type: "choice",
+    items: [
+      choice(
+        "Ыстық шайдағы металл қасықтың сабы қызды. Бұл қандай құбылыс?",
+        ["Сәулелену", "Конвекция", "Жылуөткізгіштік"],
+        2,
+        "Энергия металл бойымен таралады."
+      ),
+      choice(
+        "Бөлмедегі жылы ауа жоғары көтерілді. Бұл не?",
+        ["Конвекция", "Сәулелену", "Үйкеліс"],
+        0,
+        "Жылы ауаның тығыздығы төмендеп, жоғары көтеріледі."
+      ),
+      choice(
+        "Оттан алыста тұрғанда оның жылуын сезінеміз. Негізгі тәсілі?",
+        ["Жылуөткізгіштік", "Жұмыс атқару", "Сәулелену"],
+        2,
+        "От энергияны сәулелену арқылы да береді."
+      )
+    ]
+  },
+  {
+    title: "🔎 Қатені тап",
+    minutes: 2,
+    points: 10,
+    type: "choice",
+    items: [
+      choice(
+        "4200 × 2 × 10 = 8400 Дж деп есептелді. Дұрыс жауап қандай?",
+        ["84000 Дж", "840 Дж", "8400 Дж"],
+        0,
+        "4200 × 2 × 10 = 84000 Дж."
+      ),
+      choice(
+        "Газ Q = 2000 Дж жылу алып, A = 300 Дж жұмыс атқарды. ΔU қанша?",
+        ["2300 Дж", "1700 Дж", "300 Дж"],
+        1,
+        "ΔU = Q − A = 1700 Дж."
+      ),
+      choice(
+        "20°C және 60°C суды араластырғанда соңғы температура 90°C болады деді.",
+        [
+          "Дұрыс",
+          "100°C болады",
+          "Қате, температура екі мәннің арасында болады"
+        ],
+        2,
+        "Жылу шығыны жоқта қоспаның температурасы бастапқы екі температураның арасында болады."
+      )
+    ]
+  },
+  {
+    title: "⚡ Жылдам блиц",
+    minutes: 2,
+    points: 5,
+    type: "choice",
+    items: [
+      choice(
+        "60°C − 20°C = ?",
+        ["40°C", "80°C", "20°C"],
+        0, "Жауабы: 40°C."
+      ),
+      choice(
+        "Масса екі есе артса, Q қалай өзгереді?",
+        ["Кемиді", "Екі есе артады", "Өзгермейді"],
+        1, "Q массаға тура пропорционал."
+      ),
+      choice(
+        "1 кДж неше Дж?",
+        ["100", "10", "1000"],
+        2, "1 кДж = 1000 Дж."
+      ),
+      choice(
+        "Q = 0 және A = −200 Дж. ΔU = ?",
+        ["200 Дж", "−200 Дж", "0"],
+        0, "ΔU = 0 − (−200) = 200 Дж."
+      ),
+      choice(
+        "Судың меншікті жылусыйымдылығы?",
+        ["460", "4200", "900"],
+        1, "Су үшін c = 4200 Дж/(кг·°C)."
+      ),
+      choice(
+        "Салқындағанда Q таңбасы қандай?",
+        ["Оң", "Нөл", "Теріс"],
+        2, "Δt теріс, сондықтан Q теріс."
+      )
+    ]
+  },
+  {
+    title: "🎨 Шығармашылық финал",
+    minutes: 4,
+    points: 30,
+    type: "creative",
+    items: []
+  }
+];
+
+// ==============================================
+// 9. КОМАНДАЛАР ЖӘНЕ ҰПАЙЛАР
+// ==============================================
+
+const teamNames = [
+  "Жылу",
+  "Энергия",
+  "Температура"
+];
+
+const gameAnswers = {};
+const creativeAwards = [null, null, null];
+
+function answerKey(roundIndex, questionIndex) {
+  return `${roundIndex}-${questionIndex}`;
+}
+
+// Әр команданың әр ойыннан алған ұпайы
+function getRoundScores(teamIndex) {
+  return rounds.map((r, roundIndex) => {
+    if (r.type === "creative") {
+      return creativeAwards[teamIndex] ?? 0;
+    }
+
+    let sum = 0;
+
+    r.items.forEach((item, questionIndex) => {
+      if (questionIndex % 3 !== teamIndex) return;
+
+      const answer = gameAnswers[
+        answerKey(roundIndex, questionIndex)
+      ];
+
+      if (answer && answer.correct) {
+        sum += r.points;
+      }
+    });
+
+    return sum;
+  });
+}
+
+// Жалпы ұпай
+function getScore(teamIndex) {
+  return getRoundScores(teamIndex)
+    .reduce((a, b) => a + b, 0);
+}
+
+function scoreboardHTML() {
+  return `
+    <div class="scoreboard">
+      ${teamNames.map((name, i) => `
+        <div class="team">
+          <small>${i + 1}-команда</small>
+
+          <input data-team-name="${i}"
+            maxlength="24"
+            value="${safe(name)}"
+            aria-label="Команданың атауы">
+
+          <strong>${getScore(i)}</strong>
+          <small>ұпай</small>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+// ==============================================
+// 10. ОЙЫНҒА АРНАЛҒАН СУРЕТТЕР
+// ==============================================
+
+function gamePicture(type) {
+  let image = "";
+
+  if (type === "metal") {
+    image = `
+      <rect x="75" y="95" width="510" height="45"
+        rx="12" fill="#829baa"/>
+      <rect x="75" y="95" width="160" height="45"
+        rx="12" fill="#ff9b62"/>
+      <line x1="250" y1="118" x2="510" y2="118"
+        stroke="#80e7ff" stroke-width="8"/>
+      <text x="330" y="185" text-anchor="middle"
+        fill="white" font-size="22">
+        Ыстық ұштан салқын ұшқа
+      </text>
+    `;
+  }
+
+  if (type === "water") {
+    image = `
+      <rect x="200" y="35" width="270" height="160"
+        rx="20" fill="#2876a5" stroke="#80d9ff"
+        stroke-width="5"/>
+      <path d="M270 165 L270 75 L255 95
+        M270 75 L285 95"
+        fill="none" stroke="#ffb57c" stroke-width="8"/>
+      <path d="M405 75 L405 165 L390 145
+        M405 165 L420 145"
+        fill="none" stroke="#a6eeff" stroke-width="8"/>
+    `;
+  }
+
+  if (type === "sun") {
+    image = `
+      <circle cx="145" cy="115" r="65" fill="#ffc75e"/>
+      <circle cx="540" cy="115" r="67" fill="#328acc"/>
+      <path d="M510 75 Q565 110 505 154"
+        fill="none" stroke="#74d5a4" stroke-width="17"/>
+      <path d="M235 75 L440 75
+        M235 115 L440 115
+        M235 155 L440 155"
+        stroke="#ffdf87" stroke-width="6"/>
+    `;
+  }
+
+  return `
+    <div class="diagram">
+      <svg viewBox="0 0 680 225"
+        xmlns="http://www.w3.org/2000/svg">
+        <rect width="680" height="225"
+          rx="16" fill="#0a2741"/>
+        ${image}
+      </svg>
+    </div>
+  `;
+}
+
+// ==============================================
+// 11. ОЙЫН БЕТТЕРІ
+// ==============================================
+
+function renderGame() {
+  if (showResults) {
+    renderResults();
+    return;
+  }
+
+  const r = rounds[gameRound];
+
+  let content = "";
+
+  if (r.type === "creative") {
+    content = renderCreativeHTML();
+  } else {
+    const item = r.items[gameQuestion];
+    const team = gameQuestion % 3;
+
+    const key = answerKey(gameRound, gameQuestion);
+    const saved = gameAnswers[key];
+
+    let answersHTML = "";
+
+    if (r.type === "numeric") {
+      answersHTML = `
+        <label class="field">
+          Жауап (Дж)
+          <input id="gameNumber" type="number"
+            step="any" placeholder="Санмен жаз"
+            ${saved ? "disabled" : ""}
+            value="${saved ? saved.value : ""}">
+        </label>
+
+        <div class="actions">
+          <button class="btn primary"
+            data-action="game-number"
+            ${saved ? "disabled" : ""}>
+            ✅ Есепті тексеру
+          </button>
+        </div>
+      `;
+    } else {
+      answersHTML = `
+        <div class="options">
+          ${item.options.map((option, index) => {
+            let cls = "option";
+
+            if (saved) {
+              if (index === item.right) cls += " correct";
+              else if (index === saved.choice) cls += " wrong";
+            }
+
+            return `
+              <button class="${cls}"
+                data-action="game-choice"
+                data-index="${index}"
+                ${saved ? "disabled" : ""}>
+                ${String.fromCharCode(65 + index)}) ${option}
+              </button>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    content = `
+      <div class="card">
+        <span class="tag">
+          СҰРАҚ ${gameQuestion + 1} / ${r.items.length}
+        </span>
+
+        <h3>
+          🎯 Кезек: ${team + 1}-команда —
+          ${safe(teamNames[team])}
+        </h3>
+
+        <h2>${item.q}</h2>
+
+        <p>Дұрыс жауап: +${r.points} ұпай</p>
+
+        ${item.picture
+          ? gamePicture(item.picture)
+          : ""}
+
+        ${answersHTML}
+
+        <div id="gameWarning"></div>
+
+        ${saved ? `
+          <div class="feedback">
+            ${saved.correct
+              ? `✅ Дұрыс! +${r.points} ұпай`
+              : "❌ Қате жауап. 0 ұпай"}
+
+            <br><br>
+            <b>Түсіндірме:</b> ${item.why}
+          </div>
+        ` : ""}
+
+        <div class="actions">
+          <button class="btn"
+            data-action="back">
+            ← Алдыңғы сұрақ
+          </button>
+          <button class="btn primary"
+            data-action="next">
+            Келесі →
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  $("view").innerHTML = `
+    <div class="card">
+      <h2>🏆 Командалардың ұпайлары</h2>
+      <p class="muted">
+        Команда атауларын өзгертуге болады.
+        Жауап тексерілгенде ұпай қосылады.
+      </p>
+      ${scoreboardHTML()}
+    </div>
+
+    <div class="card">
+      <h2>🎮 Ойын кезеңдері</h2>
+
+      <div class="round-tabs">
+        ${rounds.map((item, i) => `
+          <button class="tab
+            ${gameRound === i ? "active" : ""}"
+            data-action="round" data-index="${i}">
+            ${i + 1}-ойын
+          </button>
+        `).join("")}
+      </div>
+
+      <div class="progress">
+        <div style="width:${(gameRound + 1) / 8 * 100}%"></div>
+      </div>
+
+      <h3>${r.title}</h3>
+      <p>Ұсынылатын уақыт: ${r.minutes} минут</p>
+
+      <div class="actions">
+        <button class="btn primary"
+          data-action="results">
+          📊 Жалпы ұпайды көру
+        </button>
+      </div>
+    </div>
+
+    ${content}
+  `;
+}
+
+function saveGameChoice(index) {
+  const r = rounds[gameRound];
+  const item = r.items[gameQuestion];
+  const key = answerKey(gameRound, gameQuestion);
+
+  if (gameAnswers[key]) return;
+
+  gameAnswers[key] = {
+    choice: index,
+    correct: index === item.right
+  };
+
+  render();
+}
+
+function saveGameNumber() {
+  const input = $("gameNumber");
+  const key = answerKey(gameRound, gameQuestion);
+
+  if (gameAnswers[key]) return;
+
+  if (!input || input.value.trim() === "") {
+    $("gameWarning").textContent =
+      "Алдымен сандық жауапты енгіз.";
+    return;
+  }
+
+  const value = Number(input.value);
+  const item = rounds[gameRound].items[gameQuestion];
+
+  const tolerance = Math.max(
+    0.01,
+    Math.abs(item.answer) * 0.00001
+  );
+
+  gameAnswers[key] = {
+    value,
+    correct: Number.isFinite(value) &&
+      Math.abs(value - item.answer) <= tolerance
+  };
+
+  render();
+}
+
+// ==============================================
+// 12. ШЫҒАРМАШЫЛЫҚ ФИНАЛ
+// ==============================================
+
+const creativeTasks = [
+  {
+    title: "🔥 1-команда — Жылу",
+    description: `
+      Дәптерге жылуөткізгіштік құбылысының
+      үлкен схемасын салыңдар.
+
+      Ыстық және суық аймақтарды көрсетіңдер.
+      Жылудың берілу бағытын белгілеңдер.
+      Екі өмірлік мысал келтіріңдер.
+    `
+  },
+  {
+    title: "⚡ 2-команда — Энергия",
+    description: `
+      Q = cmΔt формуласымен өз есептеріңді
+      құрастырыңдар.
+
+      Берілгенін, формуласын және толық
+      шешу жолын жазыңдар.
+
+      Жауапты Дж және кДж түрінде көрсетіңдер.
+    `
+  },
+  {
+    title: "❄️ 3-команда — Температура",
+    description: `
+      Жылуөткізгіштік, конвекция,
+      сәулелену құбылыстарының үш
+      түрлі суретін салыңдар.
+
+      Әр суретті түсіндіріп,
+      өмірден мысал келтіріңдер.
+    `
+  }
+];
+
+function renderCreativeHTML() {
+  return `
+    <div class="card">
+      <h2>🎨 Шығармашылық финал</h2>
+
+      <p class="lead">
+        Әр команда өз тапсырмасын дәптерге
+        немесе тақтаға орындайды.
+      </p>
+
+      ${creativeTasks.map((task, i) => `
+        <div class="creative-task">
+          <h3>${task.title}</h3>
+
+          <p style="white-space:pre-line">
+            ${task.description}
+          </p>
+
+          <p>
+            0 ұпай — орындалмады.<br>
+            10 ұпай — жартылай дұрыс.<br>
+            20 ұпай — толық орындалған.<br>
+            30 ұпай — өте жақсы түсіндірілген.
+          </p>
+
+          <div class="actions">
+            ${[0,10,20,30].map(points => `
+              <button class="btn
+                ${creativeAwards[i] === points
+                  ? "primary" : ""}"
+                data-action="award"
+                data-team="${i}"
+                data-points="${points}">
+                ${points} ұпай
+              </button>
+            `).join("")}
+          </div>
+
+          <p class="muted">
+            ${creativeAwards[i] === null
+              ? "Әлі бағаланбады"
+              : `Бағасы: ${creativeAwards[i]} ұпай`}
+          </p>
+        </div>
+      `).join("")}
+
+      <div class="actions">
+        <button class="btn primary"
+          data-action="results">
+          🏆 ҚОРЫТЫНДЫНЫ КӨРУ →
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// ==============================================
+// 13. ТОЛЫҚ ҚОРЫТЫНДЫ ЖӘНЕ ОРЫНДАР
+// ==============================================
+
+function renderResults() {
+  const results = teamNames.map((name, i) => {
+    const perRound = getRoundScores(i);
+    const total = perRound.reduce((a, b) => a + b, 0);
+
+    return {
+      name: name.trim() || `${i + 1}-команда`,
+      perRound,
+      total,
+      teamIndex: i
+    };
+  });
+
+  // Ұпай бойынша кему ретімен сұрыптау
+  results.sort((a, b) => b.total - a.total);
+
+  // Тең ұпайға тең орын
+  results.forEach((item, i) => {
+    item.rank = i > 0 &&
+      item.total === results[i - 1].total
+      ? results[i - 1].rank
+      : i + 1;
+  });
+
+  const maxScore = results[0].total;
+
+  const winners = results.filter(
+    item => item.total === maxScore
+  );
+
+  const medals = {
+    1: "🥇",
+    2: "🥈",
+    3: "🥉"
+  };
+
+  const winnerText = winners.length > 1
+    ? "Бірінші орын тең бөлінді: " +
+      winners.map(item => safe(item.name)).join(" және ")
+    : "Жеңімпаз — " + safe(winners[0].name);
+
+  $("view").innerHTML = `
+    <div class="card result-hero">
+      <div class="tag">ФИНАЛДЫҚ НӘТИЖЕ</div>
+
+      <h2>🏆 ФИЗИКА БАТЛЫ — ҚОРЫТЫНДЫ</h2>
+
+      <p>
+        Жылу мөлшері. Ішкі энергияны өзгерту әдістері.
+      </p>
+
+      <div class="winner-banner">
+        ${maxScore > 0
+          ? `${winnerText}<br>${maxScore} ұпай`
+          : "Әзірге ұпай жиналмаған"}
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🥇 Командалардың орындары</h2>
+
+      <div class="podium">
+        ${results.map(item => `
+          <div class="podium-card
+            ${item.rank === 1 ? "first" : ""}">
+
+            <div class="medal">
+              ${medals[item.rank] || "🏅"}
+            </div>
+
+            <h3>${safe(item.name)}</h3>
+
+            <strong>${item.total}</strong>
+            <p>ұпай</p>
+
+            <small>${item.rank}-орын</small>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Барлық 8 ойынның ұпай кестесі</h2>
+
+      <p>
+        Әр команда қай ойыннан қанша ұпай
+        жинағанын осы жерден көре алады.
+      </p>
+
+      <div class="table-scroll">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Орын</th>
+              <th>Команда</th>
+              ${rounds.map((_, i) =>
+                `<th>${i + 1}-ойын</th>`
+              ).join("")}
+              <th>Жалпы</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            ${results.map(item => `
+              <tr>
+                <td>
+                  ${medals[item.rank] || "🏅"}
+                  ${item.rank}
+                </td>
+
+                <td><b>${safe(item.name)}</b></td>
+
+                ${item.perRound.map((score, roundIndex) => `
+                  <td>
+                    ${roundIndex === 7 &&
+                      creativeAwards[item.teamIndex] === null
+                      ? "—"
+                      : score}
+                  </td>
+                `).join("")}
+
+                <td>
+                  <b>${item.total}</b>
+                </td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Ойындардың атаулары</h3>
+
+      ${rounds.map((r, i) => `
+        <p>${i + 1}. ${r.title}</p>
+      `).join("")}
+    </div>
+
+    <div class="card">
+      <h2>📈 Командалардың нәтижесін салыстыру</h2>
+
+      ${results.map(item => `
+        <div style="margin:18px 0">
+          <b>
+            ${medals[item.rank] || "🏅"}
+            ${safe(item.name)} — ${item.total} ұпай
+          </b>
+
+          <div class="progress" style="height:18px">
+            <div style="width:${
+              maxScore > 0
+                ? item.total / maxScore * 100
+                : 0
+            }%"></div>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+
+    <div class="card">
+      <h2>🎓 Сабақтың қорытындысы</h2>
+
+      <p>
+        Бүгін студенттер ішкі энергия ұғымын,
+        оның өзгеру тәсілдерін, жылу мөлшерін
+        және негізгі формулаларды қарастырды.
+      </p>
+
+      <p>
+        Командалар физикалық есептер шығарып,
+        суреттермен жұмыс істеді және
+        топтық тапсырмалар орындады.
+      </p>
+
+      <div class="formula">
+        Q = cmΔt &nbsp; | &nbsp; Q = ΔU + A
+      </div>
+
+      <p>
+        Барлық қатысушыларға рақмет!
+      </p>
+
+      <div class="actions">
+        <button class="btn"
+          data-action="back-to-game">
+          ← Ойындарға қайту
+        </button>
+
+        <button class="btn primary"
+          data-action="print">
+          🖨 Қорытындыны басып шығару
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// ==============================================
+// 14. БӨЛІМДЕР АРАСЫНДА АУЫСУ
+// ==============================================
+
+function setStage(index) {
+  if (index < 0 || index > 4) return;
+
+  stage = index;
+
+  $("stageTag").textContent = sections[index][0];
+  $("stageTitle").textContent = sections[index][1];
+
+  $("stageDesc").textContent = [
+    "8 түсіндірме және көрнекі суреттер",
+    "Қысқа видео және талқылау",
+    "10 бөлімдік конспект",
+    "18 есеп, 3 қиындық деңгейі",
+    "8 ойын және толық қорытынды"
+  ][index];
+
+  document.querySelectorAll("[data-stage]").forEach(b => {
+    b.classList.toggle(
+      "active",
+      Number(b.dataset.stage) === index
+    );
+  });
+
+  $("overallProgress").style.width =
+    ((index + 1) / 5 * 100) + "%";
+
+  $("stageCounter").textContent =
+    `${index + 1} / 5 кезең`;
+
+  timerReset();
+  render();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function nextStep() {
+  if (stage === 0) {
+    if (lessonPage < 7) {
+      lessonPage++;
+      render();
+    } else {
+      setStage(1);
+    }
+    return;
+  }
+
+  if (stage === 1) {
+    setStage(2);
+    return;
+  }
+
+  if (stage === 2) {
+    setStage(3);
+    return;
+  }
+
+  if (stage === 3) {
+    if (problemPage < 17) {
+      problemPage++;
+      render();
+    } else {
+      setStage(4);
+    }
+    return;
+  }
+
+  if (stage === 4) {
+    if (showResults) return;
+
+    const r = rounds[gameRound];
+
+    if (r.type === "creative") {
+      showResults = true;
+    } else if (gameQuestion < r.items.length - 1) {
+      gameQuestion++;
+    } else if (gameRound < 7) {
+      gameRound++;
+      gameQuestion = 0;
+    }
+
+    render();
+  }
+}
+
+function previousStep() {
+  if (stage === 0) {
+    if (lessonPage > 0) {
+      lessonPage--;
+      render();
+    }
+    return;
+  }
+
+  if (stage === 4) {
+    if (showResults) {
+      showResults = false;
+      render();
+      return;
+    }
+
+    if (gameQuestion > 0) {
+      gameQuestion--;
+      render();
+      return;
+    }
+
+    if (gameRound > 0) {
+      gameRound--;
+      gameQuestion =
+        rounds[gameRound].items.length - 1;
+      render();
+      return;
+    }
+
+    setStage(3);
+    return;
+  }
+
+  if (stage === 3 && problemPage > 0) {
+    problemPage--;
+    render();
+    return;
+  }
+
+  setStage(stage - 1);
+}
+
+function updateControls() {
+  const beginning =
+    stage === 0 && lessonPage === 0;
+
+  $("previousButton").disabled = beginning;
+  $("nextButton").disabled = stage === 4 && showResults;
+
+  $("nextButton").innerHTML =
+    stage === 4 && !showResults && gameRound === 7
+      ? "🏆 <span>Қорытынды</span>"
+      : "➜ <span>Келесі</span>";
+}
+
+// ==============================================
+// 15. БАРЛЫҚ БЕТТІ ШЫҒАРУ
+// ==============================================
+
+function render() {
+  if (stage === 0) renderLesson();
+  if (stage === 1) renderVideo();
+  if (stage === 2) renderNotes();
+  if (stage === 3) renderProblem();
+  if (stage === 4) renderGame();
+
+  updateControls();
+}
+
+$("previousButton").onclick = previousStep;
+$("nextButton").onclick = nextStep;
+
+document.querySelectorAll("[data-stage]").forEach(btn => {
+  btn.onclick = () => setStage(Number(btn.dataset.stage));
+});
+
+// Бір ортақ оқиға тыңдаушы барлық
+// жаңа батырмалардың жұмысын қамтамасыз етеді.
+$("view").addEventListener("click", event => {
+  const btn = event.target.closest("button[data-action]");
+  if (!btn || btn.disabled) return;
+
+  const action = btn.dataset.action;
+
+  if (action === "next") nextStep();
+  if (action === "back") previousStep();
+
+  if (action === "level") {
+    problemPage = Number(btn.dataset.index) * 6;
+    render();
+  }
+
+  if (action === "check-problem") checkProblem();
+
+  if (action === "solution") {
+    revealedSolutions.add(problemPage);
+    $("solutionBox").hidden = false;
+  }
+
+  if (action === "round") {
+    showResults = false;
+    gameRound = Number(btn.dataset.index);
+    gameQuestion = 0;
+    render();
+  }
+
+  if (action === "game-choice") {
+    saveGameChoice(Number(btn.dataset.index));
+  }
+
+  if (action === "game-number") {
+    saveGameNumber();
+  }
+
+  if (action === "award") {
+    const team = Number(btn.dataset.team);
+    const points = Number(btn.dataset.points);
+
+    creativeAwards[team] = points;
+    render();
+  }
+
+  if (action === "results") {
+    showResults = true;
+    render();
+  }
+
+  if (action === "back-to-game") {
+    showResults = false;
+    render();
+  }
+
+  if (action === "print") {
+    window.print();
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Команда атауын өзгерту
+$("view").addEventListener("input", event => {
+  const input = event.target;
+
+  if (input.matches("[data-team-name]")) {
+    const index = Number(input.dataset.teamName);
+    teamNames[index] = input.value;
+  }
+});
+
+// ==============================================
+// 16. КАЛЬКУЛЯТОРДЫ АШУ
+// ==============================================
+
+function toggleCalculator(open) {
+  $("calcPanel").hidden = !open;
+
+  $("calcToggle").setAttribute(
+    "aria-expanded",
+    String(open)
+  );
+}
+
+$("calcToggle").onclick = () => {
+  toggleCalculator($("calcPanel").hidden);
+};
+
+$("calcClose").onclick = () => {
+  toggleCalculator(false);
+};
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    toggleCalculator(false);
+  }
+});
+
+document.querySelectorAll("[data-mode]").forEach(btn => {
+  btn.onclick = () => {
+    const physics = btn.dataset.mode === "physics";
+
+    $("mathMode").hidden = physics;
+    $("physicsMode").hidden = !physics;
+
+    document.querySelectorAll("[data-mode]").forEach(b => {
+      b.classList.toggle("active", b === btn);
+    });
+  };
+});
+
+// ==============================================
+// 17. МАТЕМАТИКАЛЫҚ КАЛЬКУЛЯТОР
+// ==============================================
+
+let mathCurrent = "0";
+let mathPrevious = null;
+let mathOperator = null;
+let mathWaiting = false;
+
+function mathDraw() {
+  $("mathDisplay").textContent = mathCurrent;
+}
+
+function operation(a, b, op) {
+  if (op === "+") return a + b;
+  if (op === "-") return a - b;
+  if (op === "*") return a * b;
+  if (op === "/") return b === 0 ? NaN : a / b;
+  return b;
+}
+
+function calcKey(key) {
+  if (key === "AC") {
+    mathCurrent = "0";
+    mathPrevious = null;
+    mathOperator = null;
+    mathWaiting = false;
+  }
+
+  else if (key === "BACK") {
+    mathCurrent = mathWaiting
+      ? "0"
+      : mathCurrent.slice(0, -1) || "0";
+
+    mathWaiting = false;
+  }
+
+  else if (key === "SIGN") {
+    if (mathCurrent !== "Қате") {
+      mathCurrent = String(-Number(mathCurrent));
+    }
+  }
+
+  else if (key === "%") {
+    if (mathCurrent !== "Қате") {
+      mathCurrent = String(Number(mathCurrent) / 100);
+    }
+  }
+
+  else if (key === "=") {
+    if (mathOperator !== null && !mathWaiting) {
+      const value = operation(
+        mathPrevious,
+        Number(mathCurrent),
+        mathOperator
+      );
+
+      mathCurrent = Number.isFinite(value)
+        ? String(Number(value.toPrecision(12)))
+        : "Қате";
+
+      mathPrevious = null;
+      mathOperator = null;
+      mathWaiting = true;
+    }
+  }
+
+  else if (["+", "-", "*", "/"].includes(key)) {
+    if (mathCurrent === "Қате") return;
+
+    if (mathOperator !== null && !mathWaiting) {
+      const result = operation(
+        mathPrevious,
+        Number(mathCurrent),
+        mathOperator
+      );
+
+      if (!Number.isFinite(result)) {
+        mathCurrent = "Қате";
+        mathDraw();
+        return;
+      }
+
+      mathCurrent = String(result);
+    }
+
+    mathPrevious = Number(mathCurrent);
+    mathOperator = key;
+    mathWaiting = true;
+  }
+
+  else if (key === ".") {
+    if (mathWaiting) {
+      mathCurrent = "0.";
+      mathWaiting = false;
+    } else if (!mathCurrent.includes(".")) {
+      mathCurrent += ".";
+    }
+  }
+
+  else {
+    if (mathWaiting || mathCurrent === "0" ||
+        mathCurrent === "Қате") {
+      mathCurrent = key;
+      mathWaiting = false;
+    } else {
+      mathCurrent += key;
+    }
+  }
+
+  mathDraw();
+}
+
+document.querySelectorAll("#calcKeys button").forEach(btn => {
+  btn.onclick = () => calcKey(btn.dataset.key);
+});
+
+// ==============================================
+// 18. ФИЗИКАЛЫҚ КАЛЬКУЛЯТОР
+// ==============================================
+
+const physicsInputs = {
+  Q: [
+    ["c", "c — жылусыйымдылық", 4200],
+    ["m", "m — масса", 2],
+    ["t1", "t₁ — бастапқы температура", 20],
+    ["t2", "t₂ — соңғы температура", 50]
+  ],
+  c: [
+    ["Q", "Q — жылу мөлшері", 84000],
+    ["m", "m — масса", 2],
+    ["dt", "Δt — температура өзгерісі", 10]
+  ],
+  m: [
+    ["Q", "Q — жылу мөлшері", 84000],
+    ["c", "c — жылусыйымдылық", 4200],
+    ["dt", "Δt — температура өзгерісі", 10]
+  ],
+  dt: [
+    ["Q", "Q — жылу мөлшері", 84000],
+    ["c", "c — жылусыйымдылық", 4200],
+    ["m", "m — масса", 2]
+  ],
+  U: [
+    ["Q", "Q — жылу", 1500],
+    ["A", "A — газ атқарған жұмыс", 500]
+  ],
+  A: [
+    ["Q", "Q — жылу", 1500],
+    ["U", "ΔU — ішкі энергия өзгерісі", 1000]
+  ],
+  total: [
+    ["U", "ΔU — ішкі энергия өзгерісі", 1000],
+    ["A", "A — газ атқарған жұмыс", 500]
+  ]
+};
+
+function drawPhysicsInputs() {
+  const type = $("formulaSelect").value;
+
+  $("physicsFields").innerHTML =
+    physicsInputs[type].map(([id, name, value]) => `
+      <label class="field">
+        ${name}
+        <input type="number" step="any"
+          data-physics="${id}" value="${value}">
+      </label>
+    `).join("");
+
+  $("physicsResult").textContent =
+    "Мәліметтерді енгізіп, есептеу батырмасын бас.";
+}
+
+$("formulaSelect").onchange = drawPhysicsInputs;
+
+$("physicsSolve").onclick = () => {
+  const values = {};
+
+  for (const input of document.querySelectorAll("[data-physics]")) {
+    if (input.value.trim() === "") {
+      $("physicsResult").textContent =
+        "Барлық мәндерді енгіз.";
+      return;
+    }
+
+    values[input.dataset.physics] = Number(input.value);
+  }
+
+  const v = values;
+  const type = $("formulaSelect").value;
+
+  let answer;
+  let unit = "Дж";
+  let label = type;
+
+  if (type === "Q") {
+    if (v.c <= 0 || v.m <= 0) {
+      $("physicsResult").textContent =
+        "c және m оң болуы керек.";
+      return;
+    }
+
+    answer = v.c * v.m * (v.t2 - v.t1);
+  }
+
+  if (type === "c") {
+    if (v.m <= 0 || v.dt === 0) {
+      $("physicsResult").textContent =
+        "m оң, Δt нөлден өзгеше болуы керек.";
+      return;
+    }
+
+    answer = v.Q / (v.m * v.dt);
+    unit = "Дж/(кг·°C)";
+  }
+
+  if (type === "m") {
+    if (v.c <= 0 || v.dt === 0) {
+      $("physicsResult").textContent =
+        "c оң, Δt нөлден өзгеше болуы керек.";
+      return;
+    }
+
+    answer = v.Q / (v.c * v.dt);
+    unit = "кг";
+  }
+
+  if (type === "dt") {
+    if (v.c <= 0 || v.m <= 0) {
+      $("physicsResult").textContent =
+        "c және m оң болуы керек.";
+      return;
+    }
+
+    answer = v.Q / (v.c * v.m);
+    label = "Δt";
+    unit = "°C";
+  }
+
+  if (type === "U") {
+    answer = v.Q - v.A;
+    label = "ΔU";
+  }
+
+  if (type === "A") {
+    answer = v.Q - v.U;
+  }
+
+  if (type === "total") {
+    answer = v.U + v.A;
+    label = "Q";
+  }
+
+  $("physicsResult").textContent =
+    Number.isFinite(answer)
+      ? `Жауабы: ${label} = ${fmt(answer)} ${unit}`
+      : "Мәндерді қайта тексер.";
+};
+
+// ==============================================
+// 19. САЙТТЫ ІСКЕ ҚОСУ
+// ==============================================
+
+drawPhysicsInputs();
+mathDraw();
+setStage(0);
+
+console.log("PHYSICS LAB — BY DARKHAN");
+console.log("8 түсіндірме, 18 есеп, 8 ойын.");
+console.log("Қорытынды ұпай кестесі іске қосылды.");
+
+</script>
+</body>
+</html>
